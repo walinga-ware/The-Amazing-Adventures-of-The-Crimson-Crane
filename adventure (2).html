@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>The Amazing Adventures of The Crimson Crane!</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Bangers&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -103,7 +103,6 @@
     padding: 1.5rem 1.25rem 5rem;
   }
 
-  /* breadcrumb / progress */
   .progress-bar {
     display: flex;
     align-items: center;
@@ -121,7 +120,6 @@
     flex-shrink: 0;
   }
 
-  /* scene card */
   .scene-card {
     background: var(--warm-white);
     border-radius: 20px;
@@ -136,7 +134,6 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* image area */
   .scene-image-wrap {
     width: 100%;
     aspect-ratio: 16/9;
@@ -151,9 +148,6 @@
     display: block;
   }
 
-
-
-  /* text body */
   .scene-body {
     padding: 1.5rem 1.5rem 1rem;
   }
@@ -185,7 +179,134 @@
 
   .scene-text p + p { margin-top: 0.85rem; }
 
-  /* choices */
+  /* ═══════════════════════════════════════
+     COMIC BOOK EFFECTS
+  ═══════════════════════════════════════ */
+
+  /* Onomatopoeia — e.g. WEE-OOO!, SLAPSHOT!!!, GOAL!, SPLASH. */
+  .comic-sfx {
+    display: inline-block;
+    font-family: 'Bangers', cursive;
+    font-size: 1.6em;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    padding: 0.12em 0.3em 0.08em;
+    border: 3px solid #111;
+    border-radius: 4px;
+    box-shadow: 3px 3px 0 #111;
+    transform: rotate(-2deg) skewX(-3deg);
+    margin: 0.1em 0.15em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  /* Alternate colours so consecutive SFX don't clash */
+  .comic-sfx:nth-child(odd)  { background: #ffdd00; color: #c80000; }
+  .comic-sfx:nth-child(even) { background: #ff4400; color: #fff; }
+  .comic-sfx.sfx-blue  { background: #0055cc; color: #fff; }
+  .comic-sfx.sfx-green { background: #00aa44; color: #fff; }
+
+  /* Villain reveal — all-caps name-drop block */
+  .comic-villain {
+    display: block;
+    font-family: 'Bangers', cursive;
+    font-size: 2em;
+    letter-spacing: 0.08em;
+    text-align: center;
+    color: #fff;
+    background: #8800cc;
+    border: 4px solid #111;
+    border-radius: 6px;
+    box-shadow: 5px 5px 0 #111;
+    padding: 0.2em 0.4em;
+    margin: 0.6em auto;
+    max-width: fit-content;
+    transform: rotate(-1deg);
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+    animation: villainPop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) both;
+  }
+  @keyframes villainPop {
+    from { transform: scale(0.5) rotate(-3deg); opacity: 0; }
+    to   { transform: scale(1)   rotate(-1deg); opacity: 1; }
+  }
+
+  /* Radio transmission */
+  .comic-radio {
+    display: block;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 0.95em;
+    background: #0a0a0a;
+    color: #7cecff;
+    border-left: 6px solid #00d4ff;
+    border-radius: 4px;
+    padding: 0.55em 0.9em;
+    margin: 0.6em 0;
+    box-shadow: inset 0 0 12px rgba(0,212,255,0.25), 2px 2px 0 #000;
+    line-height: 1.5;
+  }
+  .comic-radio::before { content: "📻 "; }
+
+  /* Speech bubble */
+  .comic-bubble-wrap {
+    display: flex;
+    margin: 0.6em 0;
+  }
+  .comic-bubble-wrap.right { justify-content: flex-end; }
+  .comic-bubble {
+    display: inline-block;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 0.9em;
+    background: #fff;
+    color: #111;
+    border: 3px solid #111;
+    border-radius: 20px;
+    padding: 0.45em 0.85em;
+    max-width: 78%;
+    box-shadow: 3px 3px 0 #111;
+    position: relative;
+    line-height: 1.45;
+  }
+  .comic-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    left: 22px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 14px solid #111;
+  }
+  .comic-bubble-wrap.right .comic-bubble::after {
+    left: auto;
+    right: 22px;
+  }
+  .comic-bubble-wrap.right .comic-bubble {
+    background: #ffee00;
+  }
+
+  /* Dramatic caption — italicised atmospheric text */
+  .comic-caption {
+    display: block;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 0.88em;
+    background: #ffee88;
+    color: #222;
+    border: 2px solid #111;
+    border-radius: 3px;
+    padding: 0.3em 0.7em;
+    margin: 0.5em 0;
+    box-shadow: 2px 2px 0 #111;
+    font-style: italic;
+  }
+
+  /* Emphasis — CHECKMATE, GOAL, BLARES etc. inline bold */
+  .comic-em {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 0.04em;
+    font-size: 1.15em;
+    color: #c80000;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
+  }
+
+  /* ── Choices ── */
   .choices-wrap {
     padding: 0 1.25rem 1.5rem;
     display: flex;
@@ -268,7 +389,6 @@
     transition: background 0.15s, transform 0.12s;
   }
   .btn-restart:hover { background: var(--amber); transform: translateY(-1px); }
-
 </style>
 </head>
 <body>
@@ -293,172 +413,51 @@
   </div>
 </div>
 
-<!-- ══════════ WIP - Stylized speech bubbles and stuff ══════════ -->
-
-<!-- <div style="max-width: 850px; margin: 0 auto; padding: 30px; background: radial-gradient(circle at top, #1e2a44 0%, #0b0f1a 70%); color: #f5f5f5; font-family: 'Trebuchet MS', sans-serif; border: 6px solid #111; box-shadow: 0 0 25px rgba(0,0,0,0.7); position: relative; overflow: hidden;">
-
-  <div style="
-    position:absolute;
-    inset:0;
-    background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
-    background-size: 10px 10px;
-    pointer-events:none;
-    opacity:0.3;
-  "></div>
-
-  <p style="font-size: 28px; line-height: 1.7; margin-bottom: 24px; text-shadow: 2px 2px 0 #000;">
-    The night fog rolls across the CN rail yard.
-  </p>
-
-  <p style="font-size: 28px; line-height: 1.7; margin-bottom: 30px; text-shadow: 2px 2px 0 #000;">
-    You adjust your hard hat.
-  </p>
-
-  <div style="
-    display:inline-block;
-    background:#ffdf00;
-    color:#d60000;
-    font-size:48px;
-    font-weight:900;
-    padding:18px 26px;
-    margin: 20px 0 30px 0;
-    transform: rotate(-4deg);
-    border:5px solid #000;
-    box-shadow: 6px 6px 0 #000;
-    text-shadow: 3px 3px 0 #000;
-    clip-path: polygon(
-      50% 0%, 61% 15%, 78% 5%, 74% 24%, 95% 20%,
-      82% 38%, 100% 50%, 82% 62%, 95% 80%, 74% 76%,
-      78% 95%, 61% 85%, 50% 100%, 39% 85%, 22% 95%,
-      26% 76%, 5% 80%, 18% 62%, 0% 50%, 18% 38%,
-      5% 20%, 26% 24%, 22% 5%, 39% 15%
-    );
-  ">
-    WEE-OOO! WEE-OOO!
-  </div>
-
-  <p style="font-size: 30px; line-height: 1.8; margin-bottom: 24px;">
-    the emergency alarm <span style="color:#ff4d4d; font-weight:900;">BLARES!</span>
-  </p>
-
-  <div style="
-    background:#111;
-    border-left:10px solid #00d4ff;
-    padding:22px;
-    margin:30px 0;
-    font-size:26px;
-    line-height:1.7;
-    box-shadow: inset 0 0 15px rgba(0,212,255,0.35);
-  ">
-    📻 <span style="color:#7cecff;">“All operators! Someone has hacked the rail controls!”</span>
-  </div>
-
-  <div style="
-    background:#111;
-    border-left:10px solid #ffcc00;
-    padding:22px;
-    margin:30px 0;
-    font-size:26px;
-    line-height:1.7;
-    box-shadow: inset 0 0 15px rgba(255,204,0,0.35);
-  ">
-    📻 <span style="color:#ffe27a;">“And the Golden Train Trophy has been stolen from City Hall!”</span>
-  </div>
-
-  <p style="
-    font-size:30px;
-    line-height:1.8;
-    margin:40px 0 20px;
-    font-style:italic;
-    color:#d8d8d8;
-    text-shadow:2px 2px 0 #000;
-  ">
-    You narrow your eyes.
-  </p>
-
-  <div style="
-    text-align:center;
-    margin:40px 0;
-  ">
-    <div style="
-      display:inline-block;
-      background:#8a00ff;
-      color:#fff;
-      padding:20px 32px;
-      font-size:54px;
-      font-weight:900;
-      border:6px solid #fff;
-      transform: rotate(-2deg);
-      box-shadow: 8px 8px 0 #000;
-      text-shadow: 4px 4px 0 #000;
-      letter-spacing:2px;
-    ">
-      THE PHANTOM CHECKMATE!
-    </div>
-  </div>
-
-  <p style="font-size:28px; line-height:1.8; margin-top:40px;">
-    Just then, your brother <span style="color:#6be3ff; font-weight:bold;">Rob</span> skates into the yard wearing roller hockey gear.
-  </p>
-
-  <div style="
-    background:#fff;
-    color:#000;
-    padding:22px 28px;
-    border-radius:40px;
-    width:fit-content;
-    max-width:80%;
-    margin:35px 0 20px auto;
-    font-size:28px;
-    font-weight:bold;
-    border:5px solid #000;
-    position:relative;
-    box-shadow:4px 4px 0 #000;
-  ">
-    “Need backup?”
-    <div style="
-      position:absolute;
-      right:40px;
-      bottom:-24px;
-      width:0;
-      height:0;
-      border-left:18px solid transparent;
-      border-right:18px solid transparent;
-      border-top:24px solid #000;
-    "></div>
-  </div>
-
-  <div style="
-    background:#ffdf00;
-    color:#000;
-    padding:22px 28px;
-    border-radius:40px;
-    width:fit-content;
-    max-width:80%;
-    margin:25px 0;
-    font-size:30px;
-    font-weight:900;
-    border:5px solid #000;
-    position:relative;
-    box-shadow:4px 4px 0 #000;
-    transform: rotate(-1deg);
-  ">
-    “You know it.”
-    <div style="
-      position:absolute;
-      left:40px;
-      bottom:-24px;
-      width:0;
-      height:0;
-      border-left:18px solid transparent;
-      border-right:18px solid transparent;
-      border-top:24px solid #000;
-    "></div>
-  </div>
-
-</div> -->
-
 <script>
+// ══════════════════════════════════════════════
+//  COMIC BOOK TEXT RENDERER
+//
+//  Markup tags supported in story text:
+//    [sfx]WEE-OOO![/sfx]          → yellow/red star-burst SFX
+//    [villain]THE PHANTOM...[/villain] → purple villain reveal block
+//    [radio]"Message..."[/radio]   → dark radio transmission box
+//    [bubble]"Speech..."[/bubble]  → left speech bubble
+//    [bubble.right]"..."[/bubble]  → right (hero) speech bubble
+//    [caption]Atmosphere...[/caption] → yellow caption strip
+//    [em]WORD[/em]                 → big red inline emphasis
+// ══════════════════════════════════════════════
+function comicify(text) {
+  // First escape any raw HTML that shouldn't be there
+  // Then process our custom tags
+
+  // Split into paragraphs first
+  const lines = text.split('\n').filter(Boolean);
+
+  return lines.map(line => {
+    // Check if the whole line is a block-level comic tag
+    const villainMatch = line.match(/^\[villain\](.*?)\[\/villain\]$/s);
+    if (villainMatch) return `<div class="comic-villain">${villainMatch[1]}</div>`;
+
+    const radioMatch = line.match(/^\[radio\](.*?)\[\/radio\]$/s);
+    if (radioMatch) return `<div class="comic-radio">${radioMatch[1]}</div>`;
+
+    const captionMatch = line.match(/^\[caption\](.*?)\[\/caption\]$/s);
+    if (captionMatch) return `<div class="comic-caption">${captionMatch[1]}</div>`;
+
+    const bubbleRightMatch = line.match(/^\[bubble\.right\](.*?)\[\/bubble\]$/s);
+    if (bubbleRightMatch) return `<div class="comic-bubble-wrap right"><div class="comic-bubble">${bubbleRightMatch[1]}</div></div>`;
+
+    const bubbleMatch = line.match(/^\[bubble\](.*?)\[\/bubble\]$/s);
+    if (bubbleMatch) return `<div class="comic-bubble-wrap"><div class="comic-bubble">${bubbleMatch[1]}</div></div>`;
+
+    // Inline replacements within a normal paragraph
+    let result = line;
+    result = result.replace(/\[sfx\](.*?)\[\/sfx\]/g, (_, w) => `<span class="comic-sfx">${w}</span>`);
+    result = result.replace(/\[em\](.*?)\[\/em\]/g, (_, w) => `<span class="comic-em">${w}</span>`);
+    return `<p>${result}</p>`;
+  }).join('');
+}
+
 // ══════════════════════════════════════════════
 //  DEFAULT STORY DATA
 // ══════════════════════════════════════════════
@@ -468,7 +467,7 @@ const DEFAULT_STORY = [
     id: "start",
     title: "The Alarm at the Train Yard",
     chapter: "Chapter 1",
-    text: "The night fog rolls across the CN rail yard.\n\nYou adjust your hard hat.\n\nSuddenly — WEE-OOO! WEE-OOO! — the emergency alarm blares!\n\nA frantic voice crackles over the radio: \"All operators! Someone has hacked the rail controls!\"\n\nThen another voice: \"And the Golden Train Trophy has been stolen from City Hall!\"\n\nYou narrow your eyes. \"Only one villain loves puzzles this much…\"\n\nTHE PHANTOM CHECKMATE!\n\nJust then, your brother Rob skates into the yard wearing roller hockey gear.\n\n\"Need backup?\" Rob asks.\n\nYou grin. \"You know it.\"",
+    text: "[caption]The night fog rolls across the CN rail yard.[/caption]\nYou adjust your hard hat.\nSuddenly — [sfx]WEE-OOO![/sfx] [sfx]WEE-OOO![/sfx] — the emergency alarm [em]BLARES![/em]\n[radio]\"All operators! Someone has hacked the rail controls!\"[/radio]\n[radio]\"And the Golden Train Trophy has been stolen from City Hall!\"[/radio]\nYou narrow your eyes. \"Only one villain loves puzzles this much…\"\n[villain]THE PHANTOM CHECKMATE![/villain]\nJust then, your brother Rob skates into the yard wearing roller hockey gear.\n[bubble]\"Need backup?\"[/bubble]\n[bubble.right]\"You know it.\"[/bubble]",
     svg: "",
     choices: [
       { label: "A) Head to City Hall to investigate the stolen trophy 🏛️", next: "ch2a" },
@@ -482,12 +481,11 @@ const DEFAULT_STORY = [
     id: "ch2a",
     title: "City Hall Mystery",
     chapter: "Chapter 2A",
-    text: "You arrive at City Hall.\n\nThe trophy display case is shattered.\n\nBut something strange is written on the wall:\n\n\"Five letters. Starts with _. Ends with _.\"\n\n______\n\nA secret elevator opens!\n\nInside is a tunnel leading underground. At the end sits Phantom Checkmate beside a giant chessboard.\n\n\"Impressive,\" the villain sneers. \"But can you solve THIS?\"",
+    text: "You arrive at City Hall.\nThe trophy display case is [em]SHATTERED.[/em]\nBut something strange is written on the wall:\n[caption]\"Five letters. Starts with _. Ends with _.\"[/caption]\nA secret elevator opens!\nInside is a tunnel leading underground. At the end sits Phantom Checkmate beside a giant chessboard.\n[bubble]\"Impressive… But can you solve THIS?\"[/bubble]",
     svg: "",
     choices: [
       { label: "A) Challenge Phantom Checkmate to a chess match ♟️", next: "ch3" },
-      { label: "B) Use the crane magnet gadget to grab the trophy immediately 🧲", next: "end2" },
-      // { label: "B) Call your family for backup 📱", next: "end3" }
+      { label: "B) Use the crane magnet gadget to grab the trophy immediately 🧲", next: "end2" }
     ]
   },
 
@@ -496,12 +494,11 @@ const DEFAULT_STORY = [
     id: "ch2b",
     title: "Runaway Trains",
     chapter: "Chapter 2B",
-    text: "The train yard erupts into chaos.\n\nFreight cars begin rolling without drivers!\n\nYou leaps into the giant crane controls. Rob skates alongside the tracks shouting directions.\n\nUsing incredible precision, you swing the magnetic crane hook and stops two runaway cars just inches before collision.\n\nBut then — a screen flickers to life. Phantom Checkmate appears.\n\n\"While you save the trains… I steal the city!\"\n\nThe villain laughs and disappears.\n\nYou now have only minutes to decide.",
+    text: "[caption]The train yard erupts into chaos.[/caption]\nFreight cars begin rolling without drivers!\nYou leap into the giant crane controls. Rob skates alongside the tracks shouting directions.\nUsing incredible precision, you swing the magnetic crane hook and stop two runaway cars just inches before collision.\nBut then — a screen flickers to life. Phantom Checkmate appears.\n[bubble]\"While you save the trains… I steal the city!\"[/bubble]\n[sfx]HA HA HA![/sfx]\nThe villain laughs and disappears.\nYou now have only minutes to decide.",
     svg: "",
     choices: [
       { label: "A) Protect the train yard completely before chasing the villain 🛤️", next: "end4" },
-      { label: "B) Leave Rob in charge and race after Phantom Checkmate 🏃", next: "end5" },
-      // { label: "C) Solve the villain's coded message hidden in the rail schedules 🔍", next: "end6" }
+      { label: "B) Leave Rob in charge and race after Phantom Checkmate 🏃", next: "end5" }
     ]
   },
 
@@ -510,10 +507,9 @@ const DEFAULT_STORY = [
     id: "ch2c",
     title: "The Old Hockey Arena",
     chapter: "Chapter 2C",
-    text: "The abandoned hockey arena is dark and silent.\n\nYou and Rob cautiously step inside.\n\nSuddenly, giant spotlights turn on.\n\nPhantom Checkmate stands at center ice wearing a black cape.\n\n\"Welcome… to your final period!\"\n\nHockey pucks begin firing from automatic machines!\n\nYou block them with a steel garbage can lid like a superhero shield.\n\nThen he notices something odd: the puck machines are arranged like a crossword puzzle grid.",
+    text: "[caption]The abandoned hockey arena is dark and silent.[/caption]\nYou and Rob cautiously step inside.\nSuddenly, giant spotlights turn on.\nPhantom Checkmate stands at center ice wearing a black cape.\n[bubble]\"Welcome… to your final period!\"[/bubble]\n[sfx]THWACK![/sfx] [sfx]THWACK![/sfx] Hockey pucks begin firing from automatic machines!\nYou block them with a steel garbage can lid like a superhero shield.\nThen you notice something odd: the puck machines are arranged like a crossword puzzle grid.",
     svg: "",
     choices: [
-      // { label: "A) Solve the crossword pattern to disable the machines 📝", next: "end7" },
       { label: "A) Challenge Phantom Checkmate to a hockey shootout 🥅", next: "end8" },
       { label: "B) Sneak into the control booth while Rob distracts the villain 🎭", next: "end9" }
     ]
@@ -521,9 +517,9 @@ const DEFAULT_STORY = [
 
   {
     id: "ch3",
-    title: "The Master of Chess",
+    title: "The Chess Match",
     chapter: "Chapter 3",
-    text: "You sit across from Phantom Checkmate. The chess clock begins ticking.\n\nMove after move, the villain attacks aggressively. But you remain calm.\n\nYears of puzzles, crosswords, and chess games have prepared you for this moment.\n\nFinally — \"CHECKMATE,\" you say.\n\nThe villain gasps.\n\nAt that exact moment, Rob swings in on a rope and grabs the Golden Train Trophy.\n\nFor a moment, it looks like the villian is defeated.\n\nBUT SUDDENLY, Phantom Checkmate pulls off one final trick — the walls begin closing in and the lights suddenly go dark.",
+    text: "You sit across from Phantom Checkmate. The chess clock begins ticking.\nMove after move, the villain attacks aggressively. But you remain calm.\nYears of puzzles, crosswords, and chess games have prepared you for this moment.\nFinally —\n[bubble.right]\"CHECKMATE.\"[/bubble]\nThe villain [em]GASPS.[/em]\nAt that exact moment, Rob swings in on a rope and grabs the Golden Train Trophy.\nFor a moment, it looks like the villain is defeated.\n[sfx]BUT SUDDENLY![/sfx] Phantom Checkmate pulls off one final trick — the walls begin closing in and the lights go [em]DARK.[/em]",
     svg: "",
     choices: [
       { label: "Call your family for backup 📱", next: "end3" }
@@ -535,7 +531,7 @@ const DEFAULT_STORY = [
     id: "end2",
     title: "The Magnet Mistake",
     chapter: "So-So Ending ⭐⭐",
-    text: "You fire the crane magnet gadget toward the trophy.\n\nBut Phantom Checkmate anticipated the move!\n\nThe magnet grabs everything metallic in the room: chairs, chess pieces, pipes… even Rob's belt buckle.\n\nThe room collapses into chaos.\n\nThe villain escapes through a hidden tunnel, but the trophy is recovered.\n\nThe city is mostly safe… but Phantom Checkmate remains at large.\n\n\"We'll get him next time,\" you say.",
+    text: "You fire the crane magnet gadget toward the trophy.\nBut Phantom Checkmate anticipated the move!\n[sfx]CLANG![/sfx] The magnet grabs everything metallic in the room: chairs, chess pieces, pipes… even Rob's belt buckle.\nThe room collapses into chaos.\nThe villain escapes through a hidden tunnel, but the trophy is recovered.\nThe city is mostly safe… but Phantom Checkmate remains at large.\n[bubble.right]\"We'll get him next time.\"[/bubble]",
     svg: "",
     choices: [],
     ending: "Trophy recovered. Villain at large. To be continued… 🧲"
@@ -544,7 +540,7 @@ const DEFAULT_STORY = [
     id: "end3",
     title: "The Family Team-Up",
     chapter: "Best Ending ⭐⭐⭐⭐",
-    text: "Within minutes, the entire family arrives.\n\nJoshua and David block escape routes. Matthew and Sarah distract the villain by pretending to solve impossible Wordle clues. Esther discovers the hidden power switch. And Solange uses her lightning-fast reflexes to trap Phantom Checkmate’s cape in the giant magnetic crane hook hanging overhead.\n\nTogether, you all outsmart Phantom Checkmate completely.\n\nPolice rush in. The city is saved!\n\nThe villain is captured, the trophy is returned, and the family becomes known as:\n\nTHE CRANE CREW!\n\nEven the newspapers call them: \"The smartest superhero family in Railport!\"",
+    text: "Within minutes, the entire family arrives.\nJoshua and David block escape routes. Matthew and Sarah distract the villain with impossible Wordle clues. Esther discovers the hidden power switch. And Solange uses her lightning-fast reflexes to trap Phantom Checkmate's cape in the giant magnetic crane hook.\nTogether, you all outsmart Phantom Checkmate completely.\n[sfx]POW![/sfx] Police rush in. The city is saved!\nThe villain is captured, the trophy is returned, and the family becomes known as:\n[villain]THE CRANE CREW![/villain]\n[caption]Even the newspapers call them: \"The smartest superhero family in Railport!\"[/caption]",
     svg: "<img src=\"Gemini_Generated_Image_8m15ss8m15ss8m15.png\"></img>",
     choices: [],
     ending: "The Crane Crew saves the day! 👨‍👩‍👧‍👦🏗️"
@@ -553,7 +549,7 @@ const DEFAULT_STORY = [
     id: "end4",
     title: "The Hero of the Yard",
     chapter: "So-So Ending ⭐⭐",
-    text: "You stay behind to save every train and worker.\n\nBy sunrise, the rail yard is safe. Everyone cheers his bravery.\n\nBut there's bad news: Phantom Checkmate escaped with the Golden Train Trophy.\n\nStill, the mayor says: \"You saved lives tonight. That matters more than trophies.\"\n\nYou smile.\n\nMaybe some victories are quieter than others.",
+    text: "You stay behind to save every train and worker.\n[caption]By sunrise, the rail yard is safe.[/caption]\nEveryone cheers your bravery.\nBut there's bad news: Phantom Checkmate escaped with the Golden Train Trophy.\nStill, the mayor says:\n[bubble]\"You saved lives tonight. That matters more than trophies.\"[/bubble]\nYou smile.\nMaybe some victories are quieter than others.",
     svg: "",
     choices: [],
     ending: "Lives saved. Trophy lost. A quiet kind of hero. 🚂"
@@ -562,34 +558,16 @@ const DEFAULT_STORY = [
     id: "end5",
     title: "The City Falls",
     chapter: "Bad Ending ⭐",
-    text: "You race after Phantom Checkmate immediately.\n\nBut without finishing the rail yard shutdown, several freight lines crash.\n\nNo one is hurt… but the entire city loses power.\n\nMeanwhile, Phantom Checkmate escapes with the trophy aboard a helicopter.\n\nHis evil laughter echoes through the sky: \"CHECKMATE!\"\n\nThe city spends weeks recovering.\n\nYou vow: \"Next time… I'll be ready.\"",
+    text: "You race after Phantom Checkmate immediately.\nBut without finishing the rail yard shutdown, several freight lines crash.\n[sfx]CRASH![/sfx]\nNo one is hurt… but the entire city loses power.\nMeanwhile, Phantom Checkmate escapes with the trophy aboard a helicopter.\n[bubble]\"CHECKMATE!\"[/bubble]\nHis evil laughter echoes through the sky.\nThe city spends weeks recovering.\n[bubble.right]\"Next time… I'll be ready.\"[/bubble]",
     svg: "",
     choices: [],
     ending: "Phantom Checkmate escapes. The city goes dark. 🚁"
   },
   {
-    id: "end6",
-    title: "The Secret Code",
-    chapter: "Good Ending ⭐⭐⭐",
-    text: "You study the rail schedules carefully.\n\nCertain letters are circled. You quickly solve the code:\n\n\"ARENA MIDNIGHT\"\n\nHe races to the hockey arena and surprises Phantom Checkmate before the villain can escape.\n\nUsing one incredible hockey slapshot, you launches a puck that knocks the trophy directly out of the villain's hands.\n\nGOAL!\n\nThe police arrest Phantom Checkmate instantly. The crowd erupts in cheers.\n\nTHE CRIMSON CRANE wins again!",
-    svg: "",
-    choices: [],
-    ending: "Code cracked. Trophy returned. GOAL! 🏒🔍"
-  },
-  {
-    id: "end7",
-    title: "The Crossword Trap",
-    chapter: "So-So Ending ⭐⭐",
-    text: "You solve the crossword perfectly.\n\nThe puck machines shut down.\n\nBut it was a distraction! Phantom Checkmate escapes through the Zamboni tunnel with the trophy.\n\nStill, you saves the arena from exploding.\n\nThe mayor thanks him personally.\n\n\"Not every battle ends with catching the bad guy.\"",
-    svg: "",
-    choices: [],
-    ending: "Arena saved. Villain escaped. A puzzle unsolved. 📝"
-  },
-  {
     id: "end8",
     title: "The Legendary Shootout",
     chapter: "Good Ending ⭐⭐⭐",
-    text: "The arena lights blaze. The scoreboard flashes:\n\nCRIMSON CRANE VS PHANTOM CHECKMATE\n\nFirst to three goals wins.\n\nThe villain cheats constantly: smoke bombs, trick pucks, slippery ice…\n\nBut your years of hockey experience are unstoppable.\n\nFINAL SHOT. He winds up —\n\nSLAPSHOT!!!\n\nThe puck blasts through the villain's mechanical goalie and smashes the control panel.\n\nThe villain slips on the ice and crashes into the penalty box.\n\n\"Guess you're doing two minutes for evil,\" you joke.\n\nThe crowd goes wild.",
+    text: "[caption]The arena lights blaze. The scoreboard flashes:[/caption]\n[villain]CRIMSON CRANE VS PHANTOM CHECKMATE[/villain]\nFirst to three goals wins.\nThe villain cheats constantly: smoke bombs, trick pucks, slippery ice…\nBut your years of hockey experience are unstoppable.\n[caption]FINAL SHOT. You wind up —[/caption]\n[sfx]SLAPSHOT!!![/sfx]\nThe puck blasts through the villain's mechanical goalie and [em]SMASHES[/em] the control panel.\nThe villain slips on the ice and crashes into the penalty box.\n[bubble.right]\"Guess you're doing two minutes for evil.\"[/bubble]\n[sfx]CROWD GOES WILD![/sfx]",
     svg: "",
     choices: [],
     ending: "SLAPSHOT! Two minutes for evil! The crowd goes wild! 🏒🥅"
@@ -598,7 +576,7 @@ const DEFAULT_STORY = [
     id: "end9",
     title: "The Great Escape",
     chapter: "So-So Ending ⭐⭐",
-    text: "Rob distracts Phantom Checkmate while you sneaks into the control booth.\n\nHe disables the traps and rescues the trophy.\n\nBut the villain escapes disguised as a referee.\n\nStill, the city celebrates the trophy's return.\n\nLater that night, you relax at home with Eliana on his lap, solving the daily Wordle together.\n\nFor now… peace has returned to Railport.",
+    text: "Rob distracts Phantom Checkmate while you sneak into the control booth.\n[sfx]CLICK![/sfx] You disable the traps and rescue the trophy.\nBut the villain escapes disguised as a referee.\nStill, the city celebrates the trophy's return.\n[caption]Later that night, you relax at home with Eliana on your lap, solving the daily Wordle together.[/caption]\nFor now… peace has returned to Railport.",
     svg: "",
     choices: [],
     ending: "Trophy rescued. Villain vanished. Wordle solved. 🕵️"
@@ -633,33 +611,29 @@ function showPage(pageId) {
   const container = document.getElementById('scene-container');
   document.getElementById('progress-text').textContent = page.chapter || '';
 
-  // Build paragraphs
-  const paras = page.text.split('\n').filter(Boolean)
-    .map(p => `<p>${p}</p>`).join('');
+  const comicHTML = comicify(page.text);
 
-  // Image: use svg field if present, else a simple placeholder
   const imageHTML = page.svg
     ? `<div class="scene-image-wrap">${page.svg}</div>`
     : `<div class="scene-image-wrap"><svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f9e8d0"/><stop offset="100%" stop-color="#fdf6ec"/></linearGradient></defs><rect width="800" height="450" fill="url(#bg)"/><text x="400" y="230" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#7a6a5e" opacity="0.6">✦ ${page.title} ✦</text></svg></div>`;
 
   const sceneCard = page.svg
     ? `<div class="scene-card">
-      <div class="scene-body">
-        <div class="scene-chapter">${page.chapter || ''}</div>
-        <div class="scene-title">${page.title}</div>
-        <div class="scene-text">${paras}</div>
-      </div>
-      ${imageHTML}
-    </div>`
+        <div class="scene-body">
+          <div class="scene-chapter">${page.chapter || ''}</div>
+          <div class="scene-title">${page.title}</div>
+          <div class="scene-text">${comicHTML}</div>
+        </div>
+        ${imageHTML}
+      </div>`
     : `<div class="scene-card">
-      <div class="scene-body">
-        <div class="scene-chapter">${page.chapter || ''}</div>
-        <div class="scene-title">${page.title}</div>
-        <div class="scene-text">${paras}</div>
-      </div>
-    </div>`;
+        <div class="scene-body">
+          <div class="scene-chapter">${page.chapter || ''}</div>
+          <div class="scene-title">${page.title}</div>
+          <div class="scene-text">${comicHTML}</div>
+        </div>
+      </div>`;
 
-  // Choices or ending
   let choicesHTML = '';
   if (page.choices && page.choices.length > 0) {
     const btns = page.choices.map(c => `
@@ -684,12 +658,8 @@ function showPage(pageId) {
       </div>`;
   }
 
-  container.innerHTML = `
-    ${sceneCard}
-    ${choicesHTML}
-  `;
+  container.innerHTML = `${sceneCard}${choicesHTML}`;
 
-  // Fix SVG sizing
   const svg = container.querySelector('.scene-image-wrap svg');
   if (svg) { svg.style.width = '100%'; svg.style.height = '100%'; svg.style.display = 'block'; }
 
