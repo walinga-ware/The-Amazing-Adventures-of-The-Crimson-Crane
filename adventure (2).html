@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>The Amazing Adventures of The Crimson Crane!</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #fdf6ec;
+    --warm-white: #fefaf4;
+    --brown: #5c3d2e;
+    --amber: #c8842a;
+    --amber-light: #e8a84a;
+    --sage: #7a9e7e;
+    --blush: #e8c4b8;
+    --text: #3a2a1e;
+    --text-light: #7a6a5e;
+    --shadow: rgba(92,61,46,0.12);
+  }
+
+  html, body {
+    min-height: 100%;
+    background: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    color: var(--text);
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(200,132,42,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(122,158,126,0.10) 0%, transparent 60%);
+    min-height: 100vh;
+  }
+
+  /* ── COVER SCREEN ── */
+  #cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .cover-ornament {
+    font-size: 2.8rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 8px rgba(200,132,42,0.3));
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 8vw, 3.2rem);
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .cover-subtitle {
+    font-style: italic;
+    color: var(--text-light);
+    font-size: 1.05rem;
+    max-width: 28ch;
+    line-height: 1.7;
+  }
+
+  .cover-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+    border: none;
+  }
+
+  .btn-start {
+    margin-top: 0.5rem;
+    padding: 0.9rem 2.5rem;
+    background: var(--brown);
+    color: var(--cream);
+    border: none;
+    border-radius: 60px;
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(92,61,46,0.25);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .btn-start:hover { background: var(--amber); box-shadow: 0 6px 24px rgba(200,132,42,0.35); transform: translateY(-1px); }
+  .btn-start:active { transform: translateY(0); }
+
+  /* ── GAME SCREEN ── */
+  #game { display: none; }
+
+  .page-wrap {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 5rem;
+  }
+
+  /* breadcrumb / progress */
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 0 0.5rem;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .progress-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--amber-light);
+    flex-shrink: 0;
+  }
+
+  /* scene card */
+  .scene-card {
+    background: var(--warm-white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px var(--shadow), 0 2px 8px rgba(0,0,0,0.04);
+    margin-top: 0.75rem;
+    animation: fadeUp 0.45s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* image area */
+  .scene-image-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #f0e6d8 0%, #e8d5c0 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scene-image-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+
+
+  /* text body */
+  .scene-body {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+
+  .scene-chapter {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    font-family: 'Lora', serif;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .scene-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 1.25;
+    margin-bottom: 0.9rem;
+  }
+
+  .scene-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .scene-text p + p { margin-top: 0.85rem; }
+
+  /* choices */
+  .choices-wrap {
+    padding: 0 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .choices-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+    margin-bottom: 0.1rem;
+    padding-left: 0.1rem;
+  }
+
+  .choice-btn {
+    width: 100%;
+    padding: 0.9rem 1.1rem;
+    background: var(--cream);
+    border: 1.5px solid rgba(92,61,46,0.14);
+    border-radius: 12px;
+    text-align: left;
+    font-family: 'Lora', serif;
+    font-size: 0.97rem;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: background 0.15s, border-color 0.15s, transform 0.12s, box-shadow 0.15s;
+    line-height: 1.45;
+  }
+  .choice-btn:hover {
+    background: var(--warm-white);
+    border-color: var(--amber-light);
+    box-shadow: 0 3px 14px rgba(200,132,42,0.15);
+    transform: translateX(3px);
+  }
+  .choice-btn:active { transform: translateX(1px); }
+
+  .choice-arrow {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--amber-light);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    font-style: normal;
+  }
+
+  /* ending card */
+  .ending-card {
+    margin-top: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f7ede0, #efdfd0);
+    border-radius: 16px;
+    text-align: center;
+    animation: fadeUp 0.5s ease both;
+  }
+  .ending-icon { font-size: 2.5rem; margin-bottom: 0.6rem; }
+  .ending-msg {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--brown);
+    font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+
+  .btn-restart {
+    padding: 0.75rem 2rem;
+    background: var(--brown);
+    color: var(--cream);
+    border: none;
+    border-radius: 50px;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.12s;
+  }
+  .btn-restart:hover { background: var(--amber); transform: translateY(-1px); }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════ COVER ══════════ -->
+<div id="cover">
+  <div class="cover-ornament">🚂🏗️</div>
+  <h1 class="cover-title">The Amazing Adventures of The Crimson Crane!</h1>
+  <hr class="cover-divider">
+  <p class="cover-subtitle">Faster than a runaway freight train! Smarter than a five-letter puzzle! A superhero adventure starring YOU!</p>
+  <button class="btn-start" onclick="startGame()">Begin the Adventure →</button>
+</div>
+
+<!-- ══════════ GAME ══════════ -->
+<div id="game">
+  <div class="page-wrap">
+    <div class="progress-bar">
+      <div class="progress-dot"></div>
+      <span id="progress-text">Chapter 1</span>
+    </div>
+    <div id="scene-container"></div>
+  </div>
+</div>
+
+<!-- ══════════ WIP - Stylized speech bubbles and stuff ══════════ -->
+
+<!-- <div style="max-width: 850px; margin: 0 auto; padding: 30px; background: radial-gradient(circle at top, #1e2a44 0%, #0b0f1a 70%); color: #f5f5f5; font-family: 'Trebuchet MS', sans-serif; border: 6px solid #111; box-shadow: 0 0 25px rgba(0,0,0,0.7); position: relative; overflow: hidden;">
+
+  <div style="
+    position:absolute;
+    inset:0;
+    background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 10px 10px;
+    pointer-events:none;
+    opacity:0.3;
+  "></div>
+
+  <p style="font-size: 28px; line-height: 1.7; margin-bottom: 24px; text-shadow: 2px 2px 0 #000;">
+    The night fog rolls across the CN rail yard.
+  </p>
+
+  <p style="font-size: 28px; line-height: 1.7; margin-bottom: 30px; text-shadow: 2px 2px 0 #000;">
+    You adjust your hard hat.
+  </p>
+
+  <div style="
+    display:inline-block;
+    background:#ffdf00;
+    color:#d60000;
+    font-size:48px;
+    font-weight:900;
+    padding:18px 26px;
+    margin: 20px 0 30px 0;
+    transform: rotate(-4deg);
+    border:5px solid #000;
+    box-shadow: 6px 6px 0 #000;
+    text-shadow: 3px 3px 0 #000;
+    clip-path: polygon(
+      50% 0%, 61% 15%, 78% 5%, 74% 24%, 95% 20%,
+      82% 38%, 100% 50%, 82% 62%, 95% 80%, 74% 76%,
+      78% 95%, 61% 85%, 50% 100%, 39% 85%, 22% 95%,
+      26% 76%, 5% 80%, 18% 62%, 0% 50%, 18% 38%,
+      5% 20%, 26% 24%, 22% 5%, 39% 15%
+    );
+  ">
+    WEE-OOO! WEE-OOO!
+  </div>
+
+  <p style="font-size: 30px; line-height: 1.8; margin-bottom: 24px;">
+    the emergency alarm <span style="color:#ff4d4d; font-weight:900;">BLARES!</span>
+  </p>
+
+  <div style="
+    background:#111;
+    border-left:10px solid #00d4ff;
+    padding:22px;
+    margin:30px 0;
+    font-size:26px;
+    line-height:1.7;
+    box-shadow: inset 0 0 15px rgba(0,212,255,0.35);
+  ">
+    📻 <span style="color:#7cecff;">“All operators! Someone has hacked the rail controls!”</span>
+  </div>
+
+  <div style="
+    background:#111;
+    border-left:10px solid #ffcc00;
+    padding:22px;
+    margin:30px 0;
+    font-size:26px;
+    line-height:1.7;
+    box-shadow: inset 0 0 15px rgba(255,204,0,0.35);
+  ">
+    📻 <span style="color:#ffe27a;">“And the Golden Train Trophy has been stolen from City Hall!”</span>
+  </div>
+
+  <p style="
+    font-size:30px;
+    line-height:1.8;
+    margin:40px 0 20px;
+    font-style:italic;
+    color:#d8d8d8;
+    text-shadow:2px 2px 0 #000;
+  ">
+    You narrow your eyes.
+  </p>
+
+  <div style="
+    text-align:center;
+    margin:40px 0;
+  ">
+    <div style="
+      display:inline-block;
+      background:#8a00ff;
+      color:#fff;
+      padding:20px 32px;
+      font-size:54px;
+      font-weight:900;
+      border:6px solid #fff;
+      transform: rotate(-2deg);
+      box-shadow: 8px 8px 0 #000;
+      text-shadow: 4px 4px 0 #000;
+      letter-spacing:2px;
+    ">
+      THE PHANTOM CHECKMATE!
+    </div>
+  </div>
+
+  <p style="font-size:28px; line-height:1.8; margin-top:40px;">
+    Just then, your brother <span style="color:#6be3ff; font-weight:bold;">Rob</span> skates into the yard wearing roller hockey gear.
+  </p>
+
+  <div style="
+    background:#fff;
+    color:#000;
+    padding:22px 28px;
+    border-radius:40px;
+    width:fit-content;
+    max-width:80%;
+    margin:35px 0 20px auto;
+    font-size:28px;
+    font-weight:bold;
+    border:5px solid #000;
+    position:relative;
+    box-shadow:4px 4px 0 #000;
+  ">
+    “Need backup?”
+    <div style="
+      position:absolute;
+      right:40px;
+      bottom:-24px;
+      width:0;
+      height:0;
+      border-left:18px solid transparent;
+      border-right:18px solid transparent;
+      border-top:24px solid #000;
+    "></div>
+  </div>
+
+  <div style="
+    background:#ffdf00;
+    color:#000;
+    padding:22px 28px;
+    border-radius:40px;
+    width:fit-content;
+    max-width:80%;
+    margin:25px 0;
+    font-size:30px;
+    font-weight:900;
+    border:5px solid #000;
+    position:relative;
+    box-shadow:4px 4px 0 #000;
+    transform: rotate(-1deg);
+  ">
+    “You know it.”
+    <div style="
+      position:absolute;
+      left:40px;
+      bottom:-24px;
+      width:0;
+      height:0;
+      border-left:18px solid transparent;
+      border-right:18px solid transparent;
+      border-top:24px solid #000;
+    "></div>
+  </div>
+
+</div> -->
+
+<script>
+// ══════════════════════════════════════════════
+//  DEFAULT STORY DATA
+// ══════════════════════════════════════════════
+const DEFAULT_STORY = [
+  // ── CHAPTER 1 ──
+  {
+    id: "start",
+    title: "The Alarm at the Train Yard",
+    chapter: "Chapter 1",
+    text: "The night fog rolls across the CN rail yard.\n\nYou adjust your hard hat.\n\nSuddenly — WEE-OOO! WEE-OOO! — the emergency alarm blares!\n\nA frantic voice crackles over the radio: \"All operators! Someone has hacked the rail controls!\"\n\nThen another voice: \"And the Golden Train Trophy has been stolen from City Hall!\"\n\nYou narrow your eyes. \"Only one villain loves puzzles this much…\"\n\nTHE PHANTOM CHECKMATE!\n\nJust then, your brother Rob skates into the yard wearing roller hockey gear.\n\n\"Need backup?\" Rob asks.\n\nYou grin. \"You know it.\"",
+    svg: "",
+    choices: [
+      { label: "A) Head to City Hall to investigate the stolen trophy 🏛️", next: "ch2a" },
+      { label: "B) Stay at the rail yard and stop the hacked trains 🚂", next: "ch2b" },
+      { label: "C) Visit the old hockey arena where Phantom Checkmate was last seen 🏒", next: "ch2c" }
+    ]
+  },
+
+  // ── CHAPTER 2A ──
+  {
+    id: "ch2a",
+    title: "City Hall Mystery",
+    chapter: "Chapter 2A",
+    text: "You arrive at City Hall.\n\nThe trophy display case is shattered.\n\nBut something strange is written on the wall:\n\n\"Five letters. Starts with _. Ends with _.\"\n\n______\n\nA secret elevator opens!\n\nInside is a tunnel leading underground. At the end sits Phantom Checkmate beside a giant chessboard.\n\n\"Impressive,\" the villain sneers. \"But can you solve THIS?\"",
+    svg: "",
+    choices: [
+      { label: "A) Challenge Phantom Checkmate to a chess match ♟️", next: "ch3" },
+      { label: "B) Use the crane magnet gadget to grab the trophy immediately 🧲", next: "end2" },
+      // { label: "B) Call your family for backup 📱", next: "end3" }
+    ]
+  },
+
+  // ── CHAPTER 2B ──
+  {
+    id: "ch2b",
+    title: "Runaway Trains",
+    chapter: "Chapter 2B",
+    text: "The train yard erupts into chaos.\n\nFreight cars begin rolling without drivers!\n\nYou leaps into the giant crane controls. Rob skates alongside the tracks shouting directions.\n\nUsing incredible precision, you swing the magnetic crane hook and stops two runaway cars just inches before collision.\n\nBut then — a screen flickers to life. Phantom Checkmate appears.\n\n\"While you save the trains… I steal the city!\"\n\nThe villain laughs and disappears.\n\nYou now have only minutes to decide.",
+    svg: "",
+    choices: [
+      { label: "A) Protect the train yard completely before chasing the villain 🛤️", next: "end4" },
+      { label: "B) Leave Rob in charge and race after Phantom Checkmate 🏃", next: "end5" },
+      // { label: "C) Solve the villain's coded message hidden in the rail schedules 🔍", next: "end6" }
+    ]
+  },
+
+  // ── CHAPTER 2C ──
+  {
+    id: "ch2c",
+    title: "The Old Hockey Arena",
+    chapter: "Chapter 2C",
+    text: "The abandoned hockey arena is dark and silent.\n\nYou and Rob cautiously step inside.\n\nSuddenly, giant spotlights turn on.\n\nPhantom Checkmate stands at center ice wearing a black cape.\n\n\"Welcome… to your final period!\"\n\nHockey pucks begin firing from automatic machines!\n\nYou block them with a steel garbage can lid like a superhero shield.\n\nThen he notices something odd: the puck machines are arranged like a crossword puzzle grid.",
+    svg: "",
+    choices: [
+      // { label: "A) Solve the crossword pattern to disable the machines 📝", next: "end7" },
+      { label: "A) Challenge Phantom Checkmate to a hockey shootout 🥅", next: "end8" },
+      { label: "B) Sneak into the control booth while Rob distracts the villain 🎭", next: "end9" }
+    ]
+  },
+
+  {
+    id: "ch3",
+    title: "The Master of Chess",
+    chapter: "Chapter 3",
+    text: "You sit across from Phantom Checkmate. The chess clock begins ticking.\n\nMove after move, the villain attacks aggressively. But you remain calm.\n\nYears of puzzles, crosswords, and chess games have prepared you for this moment.\n\nFinally — \"CHECKMATE,\" you say.\n\nThe villain gasps.\n\nAt that exact moment, Rob swings in on a rope and grabs the Golden Train Trophy.\n\nFor a moment, it looks like the villian is defeated.\n\nBUT SUDDENLY, Phantom Checkmate pulls off one final trick — the walls begin closing in and the lights suddenly go dark.",
+    svg: "",
+    choices: [
+      { label: "Call your family for backup 📱", next: "end3" }
+    ]
+  },
+
+  // ── ENDINGS ──
+  {
+    id: "end2",
+    title: "The Magnet Mistake",
+    chapter: "So-So Ending ⭐⭐",
+    text: "You fire the crane magnet gadget toward the trophy.\n\nBut Phantom Checkmate anticipated the move!\n\nThe magnet grabs everything metallic in the room: chairs, chess pieces, pipes… even Rob's belt buckle.\n\nThe room collapses into chaos.\n\nThe villain escapes through a hidden tunnel, but the trophy is recovered.\n\nThe city is mostly safe… but Phantom Checkmate remains at large.\n\n\"We'll get him next time,\" you say.",
+    svg: "",
+    choices: [],
+    ending: "Trophy recovered. Villain at large. To be continued… 🧲"
+  },
+  {
+    id: "end3",
+    title: "The Family Team-Up",
+    chapter: "Best Ending ⭐⭐⭐⭐",
+    text: "Within minutes, the entire family arrives.\n\nJoshua and David block escape routes. Matthew and Sarah distract the villain by pretending to solve impossible Wordle clues. Esther discovers the hidden power switch. And Solange uses her lightning-fast reflexes to trap Phantom Checkmate’s cape in the giant magnetic crane hook hanging overhead.\n\nTogether, you all outsmart Phantom Checkmate completely.\n\nPolice rush in. The city is saved!\n\nThe villain is captured, the trophy is returned, and the family becomes known as:\n\nTHE CRANE CREW!\n\nEven the newspapers call them: \"The smartest superhero family in Railport!\"",
+    svg: "<img src=\"Gemini_Generated_Image_8m15ss8m15ss8m15.png\"></img>",
+    choices: [],
+    ending: "The Crane Crew saves the day! 👨‍👩‍👧‍👦🏗️"
+  },
+  {
+    id: "end4",
+    title: "The Hero of the Yard",
+    chapter: "So-So Ending ⭐⭐",
+    text: "You stay behind to save every train and worker.\n\nBy sunrise, the rail yard is safe. Everyone cheers his bravery.\n\nBut there's bad news: Phantom Checkmate escaped with the Golden Train Trophy.\n\nStill, the mayor says: \"You saved lives tonight. That matters more than trophies.\"\n\nYou smile.\n\nMaybe some victories are quieter than others.",
+    svg: "",
+    choices: [],
+    ending: "Lives saved. Trophy lost. A quiet kind of hero. 🚂"
+  },
+  {
+    id: "end5",
+    title: "The City Falls",
+    chapter: "Bad Ending ⭐",
+    text: "You race after Phantom Checkmate immediately.\n\nBut without finishing the rail yard shutdown, several freight lines crash.\n\nNo one is hurt… but the entire city loses power.\n\nMeanwhile, Phantom Checkmate escapes with the trophy aboard a helicopter.\n\nHis evil laughter echoes through the sky: \"CHECKMATE!\"\n\nThe city spends weeks recovering.\n\nYou vow: \"Next time… I'll be ready.\"",
+    svg: "",
+    choices: [],
+    ending: "Phantom Checkmate escapes. The city goes dark. 🚁"
+  },
+  {
+    id: "end6",
+    title: "The Secret Code",
+    chapter: "Good Ending ⭐⭐⭐",
+    text: "You study the rail schedules carefully.\n\nCertain letters are circled. You quickly solve the code:\n\n\"ARENA MIDNIGHT\"\n\nHe races to the hockey arena and surprises Phantom Checkmate before the villain can escape.\n\nUsing one incredible hockey slapshot, you launches a puck that knocks the trophy directly out of the villain's hands.\n\nGOAL!\n\nThe police arrest Phantom Checkmate instantly. The crowd erupts in cheers.\n\nTHE CRIMSON CRANE wins again!",
+    svg: "",
+    choices: [],
+    ending: "Code cracked. Trophy returned. GOAL! 🏒🔍"
+  },
+  {
+    id: "end7",
+    title: "The Crossword Trap",
+    chapter: "So-So Ending ⭐⭐",
+    text: "You solve the crossword perfectly.\n\nThe puck machines shut down.\n\nBut it was a distraction! Phantom Checkmate escapes through the Zamboni tunnel with the trophy.\n\nStill, you saves the arena from exploding.\n\nThe mayor thanks him personally.\n\n\"Not every battle ends with catching the bad guy.\"",
+    svg: "",
+    choices: [],
+    ending: "Arena saved. Villain escaped. A puzzle unsolved. 📝"
+  },
+  {
+    id: "end8",
+    title: "The Legendary Shootout",
+    chapter: "Good Ending ⭐⭐⭐",
+    text: "The arena lights blaze. The scoreboard flashes:\n\nCRIMSON CRANE VS PHANTOM CHECKMATE\n\nFirst to three goals wins.\n\nThe villain cheats constantly: smoke bombs, trick pucks, slippery ice…\n\nBut your years of hockey experience are unstoppable.\n\nFINAL SHOT. He winds up —\n\nSLAPSHOT!!!\n\nThe puck blasts through the villain's mechanical goalie and smashes the control panel.\n\nThe villain slips on the ice and crashes into the penalty box.\n\n\"Guess you're doing two minutes for evil,\" you joke.\n\nThe crowd goes wild.",
+    svg: "",
+    choices: [],
+    ending: "SLAPSHOT! Two minutes for evil! The crowd goes wild! 🏒🥅"
+  },
+  {
+    id: "end9",
+    title: "The Great Escape",
+    chapter: "So-So Ending ⭐⭐",
+    text: "Rob distracts Phantom Checkmate while you sneaks into the control booth.\n\nHe disables the traps and rescues the trophy.\n\nBut the villain escapes disguised as a referee.\n\nStill, the city celebrates the trophy's return.\n\nLater that night, you relax at home with Eliana on his lap, solving the daily Wordle together.\n\nFor now… peace has returned to Railport.",
+    svg: "",
+    choices: [],
+    ending: "Trophy rescued. Villain vanished. Wordle solved. 🕵️"
+  }
+];
+
+// ══════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════
+let story = JSON.parse(JSON.stringify(DEFAULT_STORY));
+
+function getPage(id) {
+  return story.find(p => p.id === id);
+}
+
+// ══════════════════════════════════════════════
+//  COVER → GAME
+// ══════════════════════════════════════════════
+function startGame() {
+  document.getElementById('cover').style.display = 'none';
+  document.getElementById('game').style.display = 'block';
+  showPage('start');
+}
+
+// ══════════════════════════════════════════════
+//  RENDER PAGE
+// ══════════════════════════════════════════════
+function showPage(pageId) {
+  const page = getPage(pageId);
+  if (!page) return;
+
+  const container = document.getElementById('scene-container');
+  document.getElementById('progress-text').textContent = page.chapter || '';
+
+  // Build paragraphs
+  const paras = page.text.split('\n').filter(Boolean)
+    .map(p => `<p>${p}</p>`).join('');
+
+  // Image: use svg field if present, else a simple placeholder
+  const imageHTML = page.svg
+    ? `<div class="scene-image-wrap">${page.svg}</div>`
+    : `<div class="scene-image-wrap"><svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f9e8d0"/><stop offset="100%" stop-color="#fdf6ec"/></linearGradient></defs><rect width="800" height="450" fill="url(#bg)"/><text x="400" y="230" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#7a6a5e" opacity="0.6">✦ ${page.title} ✦</text></svg></div>`;
+
+  const sceneCard = page.svg
+    ? `<div class="scene-card">
+      <div class="scene-body">
+        <div class="scene-chapter">${page.chapter || ''}</div>
+        <div class="scene-title">${page.title}</div>
+        <div class="scene-text">${paras}</div>
+      </div>
+      ${imageHTML}
+    </div>`
+    : `<div class="scene-card">
+      <div class="scene-body">
+        <div class="scene-chapter">${page.chapter || ''}</div>
+        <div class="scene-title">${page.title}</div>
+        <div class="scene-text">${paras}</div>
+      </div>
+    </div>`;
+
+  // Choices or ending
+  let choicesHTML = '';
+  if (page.choices && page.choices.length > 0) {
+    const btns = page.choices.map(c => `
+      <button class="choice-btn" onclick="showPage('${c.next}')">
+        <span class="choice-arrow">›</span>
+        ${c.label}
+      </button>
+    `).join('');
+    choicesHTML = `
+      <div class="choices-wrap">
+        <div class="choices-label"></div>
+        ${btns}
+      </div>`;
+  } else {
+    choicesHTML = `
+      <div style="padding:0 1.25rem 1.25rem">
+        <div class="ending-card">
+          <div class="ending-icon">🦸🏻</div>
+          <div class="ending-msg">${page.ending || 'The End.'}</div>
+          <button class="btn-restart" onclick="showPage('start')">Read Again ↺</button>
+        </div>
+      </div>`;
+  }
+
+  container.innerHTML = `
+    ${sceneCard}
+    ${choicesHTML}
+  `;
+
+  // Fix SVG sizing
+  const svg = container.querySelector('.scene-image-wrap svg');
+  if (svg) { svg.style.width = '100%'; svg.style.height = '100%'; svg.style.display = 'block'; }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
