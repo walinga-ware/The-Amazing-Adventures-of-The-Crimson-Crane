@@ -494,7 +494,7 @@ const DEFAULT_STORY = [
     id: "ch2b",
     title: "Runaway Trains",
     chapter: "Chapter 2B",
-    text: "[caption]The train yard erupts into chaos.[/caption]\nFreight cars begin rolling without drivers!\nYou leap into the giant crane controls. Rob skates alongside the tracks shouting directions.\nUsing incredible precision, you swing the magnetic crane hook and stop two runaway cars just inches before collision.\nBut then — a screen flickers to life. Phantom Checkmate appears.\n[bubble]\"While you save the trains… I steal the city!\"[/bubble]\n[sfx]HA HA HA![/sfx]\nThe villain laughs and disappears.\nYou now have only minutes to decide.",
+    text: "The train yard erupts into chaos.\n[sfx]CLACK![/sfx] Freight cars begin rolling without drivers!\nYou leap into the crane. Rob skates alongside the tracks shouting directions.\nUsing incredible precision, you steer the crane around to stop two runaway cars just inches before collision.\nBut then — a screen flickers to life. Phantom Checkmate appears.\n[bubble]\"While you save the trains… I steal the city!\"[/bubble]\n[bubble]HA HA HA![/bubble]\nThe villain laughs and disappears.\nYou now have only minutes to decide.",
     svg: "",
     choices: [
       { label: "A) Protect the train yard completely before chasing the villain 🛤️", next: "end4" },
@@ -507,7 +507,7 @@ const DEFAULT_STORY = [
     id: "ch2c",
     title: "The Old Hockey Arena",
     chapter: "Chapter 2C",
-    text: "[caption]The abandoned hockey arena is dark and silent.[/caption]\nYou and Rob cautiously step inside.\nSuddenly, giant spotlights turn on.\nPhantom Checkmate stands at center ice wearing a black cape.\n[bubble]\"Welcome… to your final period!\"[/bubble]\n[sfx]THWACK![/sfx] [sfx]THWACK![/sfx] Hockey pucks begin firing from automatic machines!\nYou block them with a steel garbage can lid like a superhero shield.\nThen you notice something odd: the puck machines are arranged like a crossword puzzle grid.",
+    text: "[caption]The abandoned hockey arena is dark and silent. You and Rob cautiously step inside.[/caption]\nSuddenly, giant spotlights turn on.\n[bubble]\"Welcome… to your final period!\"[/bubble]\nPhantom Checkmate stands at center ice wearing a black cape.\n\n[sfx]THWACK![/sfx] [sfx]THWACK![/sfx] Hockey pucks begin firing from automatic machines!\nYou block them with a steel garbage can lid like a superhero shield.",
     svg: "",
     choices: [
       { label: "A) Challenge Phantom Checkmate to a hockey shootout 🥅", next: "end8" },
@@ -519,7 +519,7 @@ const DEFAULT_STORY = [
     id: "ch3",
     title: "The Chess Match",
     chapter: "Chapter 3",
-    text: "You sit across from Phantom Checkmate. The chess clock begins ticking.\nMove after move, the villain attacks aggressively. But you remain calm.\nYears of puzzles, crosswords, and chess games have prepared you for this moment.\nFinally — The villain [em]GASPS.[/em]\n[bubble.right]\"CHECKMATE.\"[/bubble]\nYour queen lands on the back rank, trapping his king.\n\nAt that exact moment, Rob swings in on a rope and grabs the Golden Train Trophy.\nFor a moment, it looks like the villain is defeated.\n[sfx]BUT SUDDENLY![/sfx] Phantom Checkmate pulls off one final trick — the walls begin closing in and the lights go [em]DARK.[/em]",
+    text: "[caption]You sit across from Phantom Checkmate. The chess clock begins ticking.[/caption]\nMove after move, the villain attacks aggressively. But you remain calm.\nYears of puzzles, crosswords, and chess games have prepared you for this moment.\nFinally — The villain [em]GASPS.[/em]\n[bubble.right]\"CHECKMATE.\"[/bubble]\nYour queen lands on the back rank, trapping his king.\n\nAt that exact moment, Rob swings in on a rope and grabs the Golden Train Trophy.\nFor a moment, it looks like the villain is defeated.\n[sfx]BUT SUDDENLY![/sfx] Phantom Checkmate pulls off one final trick — the walls begin closing in and the lights go [em]DARK.[/em]",
     svg: "",
     choices: [
       { label: "Call your family for backup 📱", next: "end3" }
@@ -549,7 +549,7 @@ const DEFAULT_STORY = [
     id: "end4",
     title: "The Hero of the Yard",
     chapter: "So-So Ending ⭐⭐",
-    text: "You stay behind to save every train and worker.\n[caption]By sunrise, the rail yard is safe.[/caption]\nEveryone cheers your bravery.\nBut there's bad news: Phantom Checkmate escaped with the Golden Train Trophy.\nStill, the mayor says:\n[bubble]\"You saved lives tonight. That matters more than trophies.\"[/bubble]\nYou smile.\nMaybe some victories are quieter than others.",
+    text: "You stay behind to save every train and worker.\nBy sunrise, the rail yard is safe.\nEveryone cheers your bravery.\nBut there's bad news: Phantom Checkmate escaped with the Golden Train Trophy.\nStill, the mayor says:\n[bubble]\"You saved lives tonight. That matters more than trophies.\"[/bubble]\nYou smile.\nMaybe some victories are quieter than others.",
     svg: "",
     choices: [],
     ending: "Lives saved. Trophy lost. A quiet kind of hero. 🚂"
@@ -558,7 +558,7 @@ const DEFAULT_STORY = [
     id: "end5",
     title: "The City Falls",
     chapter: "Bad Ending ⭐",
-    text: "You race after Phantom Checkmate immediately.\nBut without finishing the rail yard shutdown, several freight lines crash.\n[sfx]CRASH![/sfx]\nNo one is hurt… but the entire city loses power.\nMeanwhile, Phantom Checkmate escapes with the trophy aboard a helicopter.\n[bubble]\"CHECKMATE!\"[/bubble]\nHis evil laughter echoes through the sky.\nThe city spends weeks recovering.\n[bubble.right]\"Next time… I'll be ready.\"[/bubble]",
+    text: "You race after Phantom Checkmate immediately.\nBut without finishing the rail yard shutdown, several freight lines [sfx]CRASH![/sfx]\nNo one is hurt… but the entire city loses power.\nMeanwhile, Phantom Checkmate escapes with the trophy aboard a helicopter.\n[bubble]\"CHECKMATE!\"[/bubble]\nHis evil laughter echoes through the sky.\nThe city spends weeks recovering.\n[bubble.right]\"Next time… I'll be ready.\"[/bubble]",
     svg: "",
     choices: [],
     ending: "Phantom Checkmate escapes. The city goes dark. 🚁"
@@ -576,7 +576,7 @@ const DEFAULT_STORY = [
     id: "end9",
     title: "The Great Escape",
     chapter: "So-So Ending ⭐⭐",
-    text: "Rob distracts Phantom Checkmate while you sneak into the control booth.\n[sfx]CLICK![/sfx] You disable the traps and rescue the trophy.\nBut the villain escapes disguised as a referee.\nStill, the city celebrates the trophy's return.\n[caption]Later that night, you relax at home with Eliana on your lap, solving the daily Wordle together.[/caption]\nFor now… peace has returned to Railport.",
+    text: "Rob distracts Phantom Checkmate while you sneak into the control booth.\n[sfx]CLICK![/sfx] You disable the traps and rescue the trophy.\nBut the villain escapes disguised as a referee.\nStill, the city celebrates the trophy's return.\n[caption]Later that night, you relax at home with Eliana by your side, solving the daily Wordle together.[/caption]\nFor now… peace has returned to Railport.",
     svg: "",
     choices: [],
     ending: "Trophy rescued. Villain vanished. Wordle solved. 🕵️"
